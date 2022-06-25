@@ -16,7 +16,4 @@ jobs:
         key: ${{ secrets.MYSECRET }}
         port: 22
         script: |
-          git clone https://github.com/oli-schatzberger/after-effects.git
-          ls -al
-
-          
+          git switch gh-pages
