@@ -16,6 +16,5 @@ jobs:
         key: ${{ secrets.MYSECRET }}
         port: 22
         script: |
-          ls -al
-          ls -al
+          cat me.txt
           
