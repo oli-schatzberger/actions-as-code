@@ -1,0 +1,19 @@
+name: Deployment Workflow
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  job_one:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: testing oracle server ssh connection
+      uses: appleboy/ssh-action@master
+      with:
+        host: 152.70.179.243
+        username: ubuntu
+        key: ${{ secrets.MYSECRET }}
+        port: 22
+        script: |
+          ls -al
