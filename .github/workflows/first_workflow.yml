@@ -30,7 +30,7 @@ jobs:
           BRANCH: ${{ env.BRANCH }}
           FOLDER: ${{ env.OUTPUTPATH }}
   job_two:
-    needs: build
+    needs: job_one
     name: deploy
     runs-on: ubuntu-latest
     steps:
