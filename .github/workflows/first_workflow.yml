@@ -5,7 +5,17 @@ on:
 
 jobs:
   job_one:
-    name: Deploy
+    name: convert
+    runs-on: ubuntu-latest
+    steps:
+    - name: Asciidoctor Convert Action
+      uses: quirinecker/asciidoctor-convert-action@1.3
+      with:
+        slides: true
+        inputPath: input
+        outputPath: output
+  job_two:
+    name: deploy
     runs-on: ubuntu-latest
     steps:
     - name: testing oracle server ssh connection
@@ -16,4 +26,5 @@ jobs:
         key: ${{ secrets.MYSECRET }}
         port: 22
         script: |
-          git switch gh-pages
+          ls -al
+  
