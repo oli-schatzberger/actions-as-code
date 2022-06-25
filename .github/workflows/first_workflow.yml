@@ -16,5 +16,7 @@ jobs:
         key: ${{ secrets.MYSECRET }}
         port: 22
         script: |
-          cat me.txt
+          git clone https://github.com/oli-schatzberger/after-effects.git
+          ls -al
+
           
