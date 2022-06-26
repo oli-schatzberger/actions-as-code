@@ -13,7 +13,7 @@ jobs:
     env:
       INPUTPATH: docs
       OUTPUTPATH: dist
-      SLIDES: true
+      SLIDES: false
       BRANCH: gh-pages
     steps:
       - uses: actions/checkout@v2
