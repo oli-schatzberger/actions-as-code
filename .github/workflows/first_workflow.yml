@@ -1,4 +1,4 @@
-name: Deployment Workflow
+name: Asciidoctor-OraVM Workflow
 on:
   push:
     branches:
@@ -17,13 +17,13 @@ jobs:
       BRANCH: gh-pages
     steps:
       - uses: actions/checkout@v2
-      - name: Build
+      - name: build
         uses: quirinecker/asciidoctor-convert-action@main
         with:
           slides: ${{ env.SLIDES }}
           inputPath: ${{ env.INPUTPATH }}
           outputPath: ${{ env.OUTPUTPATH }}
-      - name: Deploy to GitHub Pages
+      - name: deploy to gh-pages
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           GITHUB_TOKEN: ${{ github.TOKEN }}

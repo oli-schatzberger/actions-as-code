@@ -1,8 +1,107 @@
-= Index page
+= asciidoctor oracle vm pipeline with gh-actions
 ifndef::imagesdir[:imagesdir: images]
+:sourcedir: ../src/main/java
+:icons: font
+:sectnums:    // Nummerierung der Überschriften / section numbering
+:toc: left
 
-image::img.png[]
+//Need this blank line after ifdef, don't know why...
+ifdef::backend-html5[]
 
-Was geht ab?
-bin ich fertig
-fngfggjnfg
+// print the toc here (not at the default position)
+//toc::[]
+
+== First steps:
+I started watching a few youtube videos to get the basics of gh-actions.
+Especially https://www.youtube.com/watch?v=R8_veQiYBjI[this] video helped me a lot because I have been able to work along while learning.
+
+== Create workflow
+Create a new github-repo and clone it start with creating these folders.
+[source, shell]
+----
+mkdir .github/workflows
+----
+
+Create the workflow file it doesn't matter how you name it.
+[source, shell]
+----
+touch first_workflow.yml
+----
+
+=== Explanation of the workflow.yml file
+image::header.png[header, 400]
+
+on:
+
+is like an event so gh-action runs this workflow if something new is pushed to main and if there are new files in docs/* .
+
+
+image::jobs.png[jobs, 400]
+
+jobs:
+
+are the task that have to be executed in a workflow
+
+=== Convert adoc to html
+For this step I used a gh-actions plugin from *Quirin Ecker* who also visited our school. It was very easy
+to use, and I had no problems.
+
+image::job1.png[job1, 400]
+
+*runs-on:*
+
+defines the runner for your job
+
+*env:*
+
+section where you define your enviroment variables
+but be careful they are visible for everyone. sensitive data should be saved in the repo secrets.
+
+*uses:*
+
+reference the used plugins here
+
+=== update the data on the Oracle Cloud
+
+This job gains access over the Oracle VM via SSH and the private key.
+The private key is defined as a repo Secret in the repo-settings.
+
+image::job2.png[job2, 400]
+
+*needs:*
+
+waits until the definded job is done after that the current one starts
+
+
+*script:*
+
+write all the statements here that you want to execute on the VM
+
+=== define secrets on GitHub
+
+First go to your repo.
+
+image::pic1.png[pic1, 600]
+
+Click on settings
+
+image::pic2.png[pic2, 600]
+
+Click on Secrets -> Actions
+
+
+image::pic3.png[pic3, 600]
+
+Click on "New repository secret" and fill in your data
+
+image::secret-syntax.png[syntax, 400]
+
+that's how you use the secrets
+
+== Setup Oracle VM
+* Setup up a Ubuntu VM
+* add a new user
+* give the user sudo-rights
+* install nginx
+* change iptables
+* add ingress rule
