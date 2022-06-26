@@ -35,9 +35,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: testing oracle server ssh connection
-      uses: appleboy/ssh-action@master
+      uses: appleboy/ssh-action@main
       with:
-        host: 152.70.179.243
+        host: ${{ secrets.MYHOST }}
         username: ubuntu
         key: ${{ secrets.MYSECRET }}
         port: 22
