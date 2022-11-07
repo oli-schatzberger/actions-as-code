@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.18">
 <link rel="icon" type="image/png" href="themes/favicon.png">
-<title>asciidoctor oracle vm pipeline with gh-actions</title>
+<title>Mikroprojekt Schatzberger</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -85,10 +85,10 @@ code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;
 ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
 ul,ol{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
-ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-ul.square{list-style-type:square}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
@@ -437,421 +437,44 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-pre.rouge table td { padding: 5px; }
-pre.rouge table pre { margin: 0; }
-pre.rouge .cm {
-  color: #999988;
-  font-style: italic;
-}
-pre.rouge .cp {
-  color: #999999;
-  font-weight: bold;
-}
-pre.rouge .c1 {
-  color: #999988;
-  font-style: italic;
-}
-pre.rouge .cs {
-  color: #999999;
-  font-weight: bold;
-  font-style: italic;
-}
-pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
-  color: #999988;
-  font-style: italic;
-}
-pre.rouge .err {
-  color: #a61717;
-  background-color: #e3d2d2;
-}
-pre.rouge .gd {
-  color: #000000;
-  background-color: #ffdddd;
-}
-pre.rouge .ge {
-  color: #000000;
-  font-style: italic;
-}
-pre.rouge .gr {
-  color: #aa0000;
-}
-pre.rouge .gh {
-  color: #999999;
-}
-pre.rouge .gi {
-  color: #000000;
-  background-color: #ddffdd;
-}
-pre.rouge .go {
-  color: #888888;
-}
-pre.rouge .gp {
-  color: #555555;
-}
-pre.rouge .gs {
-  font-weight: bold;
-}
-pre.rouge .gu {
-  color: #aaaaaa;
-}
-pre.rouge .gt {
-  color: #aa0000;
-}
-pre.rouge .kc {
-  color: #000000;
-  font-weight: bold;
-}
-pre.rouge .kd {
-  color: #000000;
-  font-weight: bold;
-}
-pre.rouge .kn {
-  color: #000000;
-  font-weight: bold;
-}
-pre.rouge .kp {
-  color: #000000;
-  font-weight: bold;
-}
-pre.rouge .kr {
-  color: #000000;
-  font-weight: bold;
-}
-pre.rouge .kt {
-  color: #445588;
-  font-weight: bold;
-}
-pre.rouge .k, pre.rouge .kv {
-  color: #000000;
-  font-weight: bold;
-}
-pre.rouge .mf {
-  color: #009999;
-}
-pre.rouge .mh {
-  color: #009999;
-}
-pre.rouge .il {
-  color: #009999;
-}
-pre.rouge .mi {
-  color: #009999;
-}
-pre.rouge .mo {
-  color: #009999;
-}
-pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
-  color: #009999;
-}
-pre.rouge .sa {
-  color: #000000;
-  font-weight: bold;
-}
-pre.rouge .sb {
-  color: #d14;
-}
-pre.rouge .sc {
-  color: #d14;
-}
-pre.rouge .sd {
-  color: #d14;
-}
-pre.rouge .s2 {
-  color: #d14;
-}
-pre.rouge .se {
-  color: #d14;
-}
-pre.rouge .sh {
-  color: #d14;
-}
-pre.rouge .si {
-  color: #d14;
-}
-pre.rouge .sx {
-  color: #d14;
-}
-pre.rouge .sr {
-  color: #009926;
-}
-pre.rouge .s1 {
-  color: #d14;
-}
-pre.rouge .ss {
-  color: #990073;
-}
-pre.rouge .s, pre.rouge .dl {
-  color: #d14;
-}
-pre.rouge .na {
-  color: #008080;
-}
-pre.rouge .bp {
-  color: #999999;
-}
-pre.rouge .nb {
-  color: #0086B3;
-}
-pre.rouge .nc {
-  color: #445588;
-  font-weight: bold;
-}
-pre.rouge .no {
-  color: #008080;
-}
-pre.rouge .nd {
-  color: #3c5d5d;
-  font-weight: bold;
-}
-pre.rouge .ni {
-  color: #800080;
-}
-pre.rouge .ne {
-  color: #990000;
-  font-weight: bold;
-}
-pre.rouge .nf, pre.rouge .fm {
-  color: #990000;
-  font-weight: bold;
-}
-pre.rouge .nl {
-  color: #990000;
-  font-weight: bold;
-}
-pre.rouge .nn {
-  color: #555555;
-}
-pre.rouge .nt {
-  color: #000080;
-}
-pre.rouge .vc {
-  color: #008080;
-}
-pre.rouge .vg {
-  color: #008080;
-}
-pre.rouge .vi {
-  color: #008080;
-}
-pre.rouge .nv, pre.rouge .vm {
-  color: #008080;
-}
-pre.rouge .ow {
-  color: #000000;
-  font-weight: bold;
-}
-pre.rouge .o {
-  color: #000000;
-  font-weight: bold;
-}
-pre.rouge .w {
-  color: #bbbbbb;
-}
-pre.rouge {
-  background-color: #f8f8f8;
-}
-</style>
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>asciidoctor oracle vm pipeline with gh-actions</h1>
+<h1>Mikroprojekt Schatzberger</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_first_steps">1. First steps:</a></li>
-<li><a href="#_create_workflow">2. Create workflow</a>
 <ul class="sectlevel2">
-<li><a href="#_explanation_of_the_workflow_yml_file">2.1. Explanation of the workflow.yml file</a></li>
-<li><a href="#_convert_adoc_to_html">2.2. Convert adoc to html</a></li>
-<li><a href="#_update_the_data_on_the_oracle_cloud">2.3. update the data on the Oracle Cloud</a></li>
-<li><a href="#_define_secrets_on_github">2.4. define secrets on GitHub</a></li>
-</ul>
-</li>
-<li><a href="#_setup_oracle_vm">3. Setup Oracle VM</a></li>
+<li><a href="#_aufgabenstellung">1. Aufgabenstellung</a></li>
+<li><a href="#_anforderungen">2. Anforderungen</a></li>
+<li><a href="#_cld">3. CLD</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_first_steps"><a class="anchor" href="#_first_steps"></a>1. First steps:</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_aufgabenstellung"><a class="anchor" href="#_aufgabenstellung"></a>1. Aufgabenstellung</h3>
 <div class="paragraph">
-<p>I started watching a few youtube videos to get the basics of gh-actions.
-Especially <a href="https://www.youtube.com/watch?v=R8_veQiYBjI">this</a> video helped me a lot because I have been able to work along while learning.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_create_workflow"><a class="anchor" href="#_create_workflow"></a>2. Create workflow</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Create a new github-repo and clone it start with creating these folders.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="shell"><span class="nb">mkdir</span> .github/workflows</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Create the workflow file it doesn&#8217;t matter how you name it.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="shell"><span class="nb">touch </span>first_workflow.yml</code></pre>
+<p>Ein Mikroprojekt zum Thema "Supermarkt erstellen".</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_explanation_of_the_workflow_yml_file"><a class="anchor" href="#_explanation_of_the_workflow_yml_file"></a>2.1. Explanation of the workflow.yml file</h3>
-<div class="imageblock">
-<div class="content">
-<img src="images/header.png" alt="header" width="400">
-</div>
-</div>
+<h3 id="_anforderungen"><a class="anchor" href="#_anforderungen"></a>2. Anforderungen</h3>
 <div class="paragraph">
-<p>on:</p>
-</div>
-<div class="paragraph">
-<p>is like an event so gh-action runs this workflow if something new is pushed to main and if there are new files in docs/* .</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/jobs.png" alt="jobs" width="400">
-</div>
-</div>
-<div class="paragraph">
-<p>jobs:</p>
-</div>
-<div class="paragraph">
-<p>are the task that have to be executed in a workflow</p>
+<p>Das Programm soll eine Supermarktauslastung simulieren können.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_convert_adoc_to_html"><a class="anchor" href="#_convert_adoc_to_html"></a>2.2. Convert adoc to html</h3>
-<div class="paragraph">
-<p>For this step I used a gh-actions plugin from <strong>Quirin Ecker</strong> who also visited our school. It was very easy
-to use, and I had no problems.</p>
-</div>
+<h3 id="_cld"><a class="anchor" href="#_cld"></a>3. CLD</h3>
 <div class="imageblock">
 <div class="content">
-<img src="images/job1.png" alt="job1" width="400">
-</div>
-</div>
-<div class="paragraph">
-<p><strong>runs-on:</strong></p>
-</div>
-<div class="paragraph">
-<p>defines the runner for your job</p>
-</div>
-<div class="paragraph">
-<p><strong>env:</strong></p>
-</div>
-<div class="paragraph">
-<p>section where you define your enviroment variables
-but be careful they are visible for everyone. sensitive data should be saved in the repo secrets.</p>
-</div>
-<div class="paragraph">
-<p><strong>uses:</strong></p>
-</div>
-<div class="paragraph">
-<p>reference the used plugins here</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_update_the_data_on_the_oracle_cloud"><a class="anchor" href="#_update_the_data_on_the_oracle_cloud"></a>2.3. update the data on the Oracle Cloud</h3>
-<div class="paragraph">
-<p>This job gains access over the Oracle VM via SSH and the private key.
-The private key is defined as a repo Secret in the repo-settings.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/job2.png" alt="job2" width="400">
-</div>
-</div>
-<div class="paragraph">
-<p><strong>needs:</strong></p>
-</div>
-<div class="paragraph">
-<p>waits until the definded job is done after that the current one starts</p>
-</div>
-<div class="paragraph">
-<p><strong>script:</strong></p>
-</div>
-<div class="paragraph">
-<p>write all the statements here that you want to execute on the VM</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_define_secrets_on_github"><a class="anchor" href="#_define_secrets_on_github"></a>2.4. define secrets on GitHub</h3>
-<div class="paragraph">
-<p>First go to your repo.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/pic1.png" alt="pic1" width="600">
-</div>
-</div>
-<div class="paragraph">
-<p>Click on settings</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/pic2.png" alt="pic2" width="600">
-</div>
-</div>
-<div class="paragraph">
-<p>Click on Secrets &#8594; Actions</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/pic3.png" alt="pic3" width="600">
-</div>
-</div>
-<div class="paragraph">
-<p>Click on "New repository secret" and fill in your data</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/secret-syntax.png" alt="syntax" width="400">
-</div>
-</div>
-<div class="paragraph">
-<p>that&#8217;s how you use the secrets</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_setup_oracle_vm"><a class="anchor" href="#_setup_oracle_vm"></a>3. Setup Oracle VM</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Setup up a Ubuntu VM</p>
-</li>
-<li>
-<p>add a new user</p>
-</li>
-<li>
-<p>give the user sudo-rights</p>
-</li>
-<li>
-<p>install nginx</p>
-</li>
-<li>
-<p>change iptables</p>
-</li>
-<li>
-<p>add ingress rule</p>
-</li>
-</ul>
+<img src="images/supermarkt.svg" alt="supermarkt" width="456" height="558">
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-06-26 16:53:18 UTC
+Last updated 2022-11-07 12:40:19 UTC
 </div>
 </div>
 </body>
